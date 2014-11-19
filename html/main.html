@@ -1,0 +1,259 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>首頁</title>
+    <style>
+        /*Pics Frame
+        =========================================================*/
+
+        #iframe_segment {
+            height: 160px;
+        }
+        iframe {
+            width: 100%;
+            height: 400px;
+        }
+        /*Main Content
+        =========================================================*/
+
+        /*Quote everyday*/
+        #quoteeveryday {
+            /* 16px * 250% 約 40px  */
+            font-size: 150%;
+			font-weight: 500;
+            margin-top: 15px;
+            margin-left: 14%;
+            margin-right: 14%;
+        }
+        /*bulltin board*/
+        .bulletin_board {
+            margin-left: 13%;
+            margin-top: 10px;
+            width: 74%;
+            margin-bottom: 130px;
+        }
+        .bulletin_board .board_content {
+            margin: 2px;
+            position: relative;
+        }
+        .board_list {
+			width: 50%;
+			float: left;
+            display: inline-block;
+        }
+		.board_text_area {
+			display: none;
+			height: 370px;
+			width: 100%;
+		}
+        .arrow-up {
+            display: block;
+            width: 100px;
+            height: 30px;
+            margin-left: 75px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 12px 10px -15px rgba(0, 0, 0, 0.5);
+        }
+        .arrow-up:after {
+            content: "";
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: #fff;
+            transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            /* IE 9 */
+            -moz-transform: rotate(45deg);
+            /* Firefox */
+            -webkit-transform: rotate(45deg);
+            /* Safari and Chrome */
+            -o-transform: rotate(45deg);
+            /* Opera */
+            top: 16px;
+            left: 25px;
+            box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.5);
+        }
+        .board_text {
+            display: block;
+            height: 320px;
+			width: 98%;
+			margin: 0 auto;
+            position: relative;
+            -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+			background: rgb(250, 250, 250);
+        }
+        .board_return {
+            display: block;
+            color: #fff;
+            margin-bottom: 2px;
+			margin: 0 auto;
+            text-align: center;
+            width: 98%;
+            height: 20px;
+            padding-top: 2px;
+            background: rgba(0, 0, 0, 0.9);
+        }
+        .board_title {
+            cursor: pointer;
+            position: relative;
+            margin-top: 10px;
+            margin-left: 10px;
+            margin-right: 10px;
+            /* 16px * 100%   */
+            font-size: 110%;
+			font-weight: 500;
+            height: 300px;
+/*            width: 40%;*/
+            background: rgb(250, 250, 250);
+            -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .board_content div:hover > .graybar {
+            display: block;
+        }
+        .board_content div div:hover > .board_title {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        .board_content .graybar {
+            display: none;
+            width: 100%;
+            height: 25px;
+            padding-right: 10px;
+            padding-top: 3px;
+            position: absolute;
+            left: 0;
+            top: 275px;
+            background: rgba(0, 0, 0, 0.7);
+            color: rgba(255, 255, 255, 0.7);
+			font-weight: 700;
+            text-align: right;
+        }
+        .board_content img {
+            width: 100%;
+            height: 180px;
+            background: url(../images/example.jpg);
+            background-size: 100% 150px;
+        }
+        .board_content #text {
+            position: relative;
+            padding: 5px 10px 0px 10px;
+            overflow: hidden;
+            line-height: 1.5em;
+            height: 5em;
+        }
+        .board_content #text::after {
+            content: "...";
+        }
+    </style>
+    <script type="text/javascript">
+        //Bulletin board click
+        var click_check = null;
+        $(".board_title").click(function () {
+			title_item_num = this.id.split('-')[1];
+			BoardTextArea = $('#board_text-'+title_item_num);
+			console.log(title_item_num);
+            if (BoardTextArea.css("display") == "block") {
+                BoardTextArea.slideUp(300);
+                click_check = null;
+            } else {
+                if (click_check != null) {
+                    click_check.slideUp(300);
+                    $('html, body').animate({
+                        scrollTop: $(this).offset().top + 155
+                    }, 1500);
+                } else {
+                    $('html, body').animate({
+                        scrollTop: $(this).offset().top + 155
+                    }, 1500);
+                }
+                BoardTextArea.slideDown(300);
+
+                click_check = BoardTextArea;
+            }
+        });
+        $(".board_return").click(
+            function () {
+                click_check.slideUp(300);
+                click_check = null;
+            }
+        );
+    </script>
+</head>
+
+<body>
+	<div id="top_segment"></div>
+
+    <div class="content">
+        <div class="background_image">
+        </div>
+
+        <div id="iframe_segment"></div>
+        <iframe id="frame_pics" src="pics.html" marginwidth="0" marginheight="0" align="top" scrolling="no" frameborder="0"></iframe>
+
+        <marquee id="quoteeveryday" onMouseOver="this.stop()" onMouseOut="this.start()">Revere the Divine, Love the Human.</marquee>
+
+        <div  class="bulletin_board">
+            <div class="board_content">
+                <div class="board_list">
+                    <div class="board_title" id="board_list-1">
+                        <img src="images/photo/1.JPG"></img>
+                        <p id="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, quasi, veritatis. Quae alias eos praesentium iure tempore suscipit facere fugit.
+                        </p>
+                        <div class="graybar">More</div>
+                    </div>
+                </div>
+                <div class="board_list">
+                    <div class="board_title" id="board_list-2">
+                        <img src="images/photo/2.JPG"></img>
+                        <p id="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum itaque repudiandae facere sit et ex hic cum dolorum repellendus quod?
+                        </p>
+                        <div class="graybar">More</div>
+                    </div>
+                </div>
+                <div class="board_text_area" id="board_text-1">
+                    <div class="arrow-up"></div>
+                    <div class="board_text"></div>
+                    <div class="board_return">^</div>
+                </div>
+                <div class="board_text_area" id="board_text-2">
+                    <div class="arrow-up"></div>
+                    <div class="board_text"></div>
+                    <div class="board_return">^</div>
+                </div>
+                <div class="board_list">
+                    <div class="board_title" id="board_list-3">
+                        <img src="images/photo/3.JPG"></img>
+                        <p id="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat quidem recusandae nemo atque, excepturi, maxime quis eos laborum doloremque autem!
+                        </p>
+                        <div class="graybar">More</div>
+                    </div>
+                </div>
+                <div class="board_list">
+                    <div class="board_title" id="board_list-4">
+                        <img src="images/photo/4.JPG"></img>
+                        <p id="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum quidem assumenda minima qui nesciunt temporibus vel optio quos praesentium harum.
+                        </p>
+                        <div class="graybar">More</div>
+                    </div>
+                </div>
+                <div class="board_text_area" id="board_text-3">
+                    <div class="arrow-up"></div>
+                    <div class="board_text"></div>
+                    <div class="board_return">^</div>
+                </div>
+                <div class="board_text_area" id="board_text-4">
+                    <div class="arrow-up"></div>
+                    <div class="board_text"></div>
+                    <div class="board_return">^</div>
+                </div>
+                <p>&nbsp;</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
