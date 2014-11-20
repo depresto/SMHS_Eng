@@ -1,0 +1,1 @@
+# SMHS English Website Designby [*Wayne Huang*](http://fb.me/Wayne.Huang.g)
